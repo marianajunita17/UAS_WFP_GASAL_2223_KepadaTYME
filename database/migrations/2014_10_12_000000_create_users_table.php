@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer("membership");
-            $table->integer("poin");
+            $table->enum('membership', ['active', 'non-active']);
+            $table->integer('poin');
             $table->enum('role', ['customer', 'owner', 'staff']);
             $table->rememberToken();
             $table->timestamps();
