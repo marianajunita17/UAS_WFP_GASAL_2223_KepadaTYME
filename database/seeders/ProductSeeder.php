@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Type;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
