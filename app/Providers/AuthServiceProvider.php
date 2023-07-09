@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\User;
+use App\Models\Pengguna;
+// use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,8 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define("checkcustomer", function(User $user){
-            if($user->role == "owner"){
+        Gate::define("checkcustomer", function(Pengguna $pengguna){
+            if($pengguna->role == "owner"){
                 return true;
             }
             else{
@@ -35,8 +36,8 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define("checkowner", function(User $user){
-            if($user->role == "owner"){
+        Gate::define("checkowner", function(Pengguna $pengguna){
+            if($pengguna->role == "owner"){
                 return true;
             }
             else{
@@ -44,8 +45,8 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define("checkstaff", function(User $user){
-            if($user->role == "staff"){
+        Gate::define("checkstaff", function(Pengguna $pengguna){
+            if($pengguna->role == "staff"){
                 return true;
             }
             else{
@@ -53,8 +54,8 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define("checkpermission", function(User $user){
-            if($user->role == "owner" || $user->role == "staff"){
+        Gate::define("checkpermission", function(Pengguna $pengguna){
+            if($pengguna->role == "owner" || $pengguna->role == "staff"){
                 return true;
             }
             else{
