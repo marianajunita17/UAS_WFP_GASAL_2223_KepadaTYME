@@ -52,5 +52,15 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
         });
+
+        Gate::define("checkpermission", function(User $user){
+            if($user->role == "owner" || $user->role == "staff"){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+
     }
 }

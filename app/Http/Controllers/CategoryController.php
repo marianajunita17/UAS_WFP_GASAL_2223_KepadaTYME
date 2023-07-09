@@ -36,14 +36,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('checkowner');
-        $this->authorize('checkstaff');
+        $this->authorize('checkpermission');
 
         $data = new Category();
 
         $data->name = $request->get('name');
         $data->save();
-        return redirect()->route('public.category')->with('status', 'Category is added');
+        return redirect()->route('category.index')->with('status', 'Category is added');
     }
 
     /**
@@ -54,8 +53,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $this->authorize("checkowner");
-        $this->authorize('checkstaff');
+        $this->authorize("checkpermission");
 
         return json_encode($category);
     }
@@ -80,12 +78,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $this->authorize('checkowner', $category);
-        $this->authorize('checkstaff', $category);
+        $this->authorize('checkpermission', $category);
 
         $category->name = $request->get('name');
         $category->save();
-        return redirect()->route('public.category')->with('status', 'Data category succesfully changed');
+        return redirect()->route('category.index')->with('status', 'Data category succesfully changed');
     }
 
     /**
@@ -96,12 +93,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $this->authorize("checkowner");
-        $this->authorize('checkstaff');
+        $this->authorize("checkpermission");
 
         return json_encode($category);
 
         $category->delete();
-        return redirect()->route('public.category')->with('message', 'delete succesfull!');
+        return redirect()->route('category.index')->with('message', 'delete succesfull!');
     }
 }

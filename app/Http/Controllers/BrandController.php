@@ -15,7 +15,7 @@ class BrandController extends Controller
     public function index()
     {
         $brand = Brand::all();
-        return view('public.brand', compact('brand'));
+        return view('brand.index', compact('brand'));
     }
 
     /**
@@ -36,8 +36,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('checkowner');
-        $this->authorize('checkstaff');
+        $this->authorize('checkpermission');
 
         $brand = new Brand();
         $brand->name = $request->get('name');
@@ -64,7 +63,10 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        $this->authorize('checkpermission');
+
+        $data = $brand;
+        return view("brand.brand-edit", compact('data'));
     }
 
     /**
@@ -76,7 +78,11 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $this->authorize('checkpermission', $brand);
+
+        $brand->name = $request->get('name');
+        $brand->save();
+        return redirect()->route('brand.index')->with('status', 'Data brand succesfully changed');
     }
 
     /**
@@ -87,6 +93,10 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $this->authorize('checkpermission', $brand);
+
+        $brand->delete();
+            return redirect()->route('brand.index')->with('status', 'Data brand succesfully deleted');
+        
     }
 }

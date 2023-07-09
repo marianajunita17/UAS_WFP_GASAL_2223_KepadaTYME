@@ -24,7 +24,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('public.member-create');
+        return view('member.member-create');
     }
 
     /**

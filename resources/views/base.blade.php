@@ -70,7 +70,7 @@
 
                         <div class="sb-sidenav-menu-heading">Addons</div>
                         @can('checkcustomer')
-                            <a class="nav-link" href="{{url('cart')}}">
+                            <a class="nav-link" href="{{url('public.cart')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                                 Cart
                             </a>
@@ -81,12 +81,12 @@
                             Compare Products
                         </a>
 
-                        @can('crud-permission')
-                        <a class="nav-link" href="{{url('transaction')}}">
+                        @can('checkpermission')
+                        <a class="nav-link" href="{{url('transaction.index')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-history"></i></div>
                             History
                         </a>
-                        <a class="nav-link" href="{{ url('brand') }}">
+                        <a class="nav-link" href="{{ url('brand.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-flag"></i></div>
                             Brand
                         </a>

@@ -35,7 +35,7 @@
                     <td>{{$i}}</td>
                     <td>{{$d->status}}</td>
                     <td>{{number_format($d->total)}}</td>
-                    @if (Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Pegawai')
+                    @if (Auth::user()->role->name == 'Owner' || Auth::user()->role->name == 'Staff')
                         <td>{{$d->user->fullname}}</td>
                         <td><button class="btn btn-info" onclick="showDetail({{$d->id}})" data-toggle="modal" data-target="#modalDetail">Lihat Detail</button></td>
                         <td>
