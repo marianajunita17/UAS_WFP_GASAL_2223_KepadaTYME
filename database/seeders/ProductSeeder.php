@@ -25,9 +25,9 @@ class ProductSeeder extends Seeder
             $p = new Product();
             $p->name = $faker->word();
             $p->price = $faker->numberBetween(10, 20000) * 100;
-            $p->filename = "https://picsum.photos/id/".$faker->numberBetween(1,1060)."/300/300";
-            $p->types_id = $faker->randomElement($types)->id;
-            $p->brands_id = $faker->randomElement($brands)->id;
+            $p->photourl = "https://picsum.photos/id/".$faker->numberBetween(1,1060)."/300/300";
+            $p->type_id = $faker->randomElement($types)->id;
+            $p->brand_id = $faker->randomElement($brands)->id;
             $p->save();
         }
     }

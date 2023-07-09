@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     function members(){
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(Member::class, 'member_id');
     }
 
     function transactions(){

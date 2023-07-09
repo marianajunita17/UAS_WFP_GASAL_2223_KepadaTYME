@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         $u->name = $faker->firstName() . " " . $faker->lastName;
         $u->email = strtolower(join("", explode(" ", $u->name))) . "@gmail.com";
         $u->password = Hash::make("123");
-        $u->role = "employee";
+        $u->role = "staff";
         $u->save();
 
         for ($i = 0; $i < 3; $i++) {
