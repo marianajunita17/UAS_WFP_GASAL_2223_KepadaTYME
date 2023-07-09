@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -37,5 +40,6 @@ class UserSeeder extends Seeder
             $user->poin = 0;
             $user->role = "customer";
             $user->save();
+        }
     }
 }
