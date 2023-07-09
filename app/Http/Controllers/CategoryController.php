@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::get();
+        return view('public.category', compact('categories'));
     }
 
     /**
@@ -46,7 +47,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $this->authorize("checkowner");
+        return json_encode($category);
     }
 
     /**
@@ -80,6 +82,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $this->authorize("checkowner");
+        return json_encode($category);
+
+        $category->delete();
+        return redirect()->route('categories.index')->with('message', 'delete succesfull!');
     }
 }

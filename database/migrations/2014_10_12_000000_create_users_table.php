@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['customer', 'owner', 'staff']);
+            $table->unsignedBigInteger('member_id');
+            $table->foreignId('member_id')->references('id')->on('members');
             $table->rememberToken();
-            $table->unsignedBigInteger("members_id");
-            $table->foreign("members_id")->references("id")->on("members");
             $table->timestamps();
         });
     }

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
+
+    function products(){
+        return $this->hasMany(Product::class);
+    }
 }

@@ -14,7 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brand = Brand::all();
+        return view('public.brand', compact('brand'));
     }
 
     /**
@@ -35,7 +36,10 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $brand = new Brand();
+        $brand->name = $request->get('name');
+        $brand->save();
+        
     }
 
     /**

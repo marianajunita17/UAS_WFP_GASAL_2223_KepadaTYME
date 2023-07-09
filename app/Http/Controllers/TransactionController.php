@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -15,6 +18,37 @@ class TransactionController extends Controller
     public function index()
     {
         //
+    }
+
+    public function formSubmit()
+    {
+        $this->authorize('checkcustomer');
+        return view('public.checkout');
+    }
+
+    public function checkout()
+    {
+        $this->authorize('checkcustomer');
+
+        $cart = session()->get('cart');
+        $user = Auth::user();
+        $t = new Transaction;
+        $t->user_id = $user->id;
+        $t->created_at = Carbon::now()->toDateTimeString();
+        $t->save();
+
+        $totalHarga = $t->insertProduct($cart, $user);
+        $t->total = $totalHarga;
+        $t->save();
+
+        foreach ($cart as $id => $detail) {
+            $p = Product::find($detail['product_id']);
+            $p->stock = $p->stock - $detail['quantity'];
+            $p->save();
+        }
+
+        session()->forget('cart');
+        return redirect('home');
     }
 
     /**
@@ -82,4 +116,6 @@ class TransactionController extends Controller
     {
         //
     }
+
+
 }

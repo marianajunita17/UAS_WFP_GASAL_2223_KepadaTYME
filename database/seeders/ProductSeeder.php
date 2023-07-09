@@ -20,6 +20,7 @@ class ProductSeeder extends Seeder
         $faker = Factory::create();
         $types = Type::get();
         $brands = Brand::get();
+
         for ($i=0; $i < 20; $i++) {
             $p = new Product();
             $p->name = $faker->word();

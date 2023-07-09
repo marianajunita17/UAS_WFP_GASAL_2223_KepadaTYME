@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::get();
+        return view("public.product-list", compact("products"));
     }
 
     /**
@@ -25,6 +26,31 @@ class ProductController extends Controller
     public function create()
     {
         //
+    }
+
+    function addcart(Product $product) {
+        $cart = session("cart"); //-> bisa gini
+        // $cart = session()->get("cart"); // bisa gni juga ambil session
+        if(!$cart){
+            $cart = array();
+        }
+        if(!isset($cart[$product->id])){
+            $cart[$product->id] = [
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "filename" => $product->filename
+            ];
+        } else{
+            $cart[$product->id]
+            ["quantity"]++;
+        }
+
+        session()->put("cart", $cart);
+        return response()->json([
+            "status"=>"oke",
+            "message"=>"sukses menambahkan $product->name ke cart"
+        ]);
     }
 
     /**

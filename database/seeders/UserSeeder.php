@@ -17,29 +17,27 @@ class UserSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        $user = new User();
-        $user->name = $faker->firstName() . " " . $faker->lastName;
-        $user->email = strtolower(join("", explode(" ", $user->name))) . "@gmail.com";
-        $user->password = Hash::make("123");
-        $user->role = "owner";
-        $user->save();
+        $u = new User();
+        $u->name = $faker->firstName() . " " . $faker->lastName;
+        $u->email = strtolower(join("", explode(" ", $u->name))) . "@gmail.com";
+        $u->password = Hash::make("123");
+        $u->role = "owner";
+        $u->save();
 
-        $user = new User();
-        $user->name = $faker->firstName() . " " . $faker->lastName;
-        $user->email = strtolower(join("", explode(" ", $user->name))) . "@gmail.com";
-        $user->password = Hash::make("123");
-        $user->role = "employee";
-        $user->save();
+        $u = new User();
+        $u->name = $faker->firstName() . " " . $faker->lastName;
+        $u->email = strtolower(join("", explode(" ", $u->name))) . "@gmail.com";
+        $u->password = Hash::make("123");
+        $u->role = "employee";
+        $u->save();
 
         for ($i = 0; $i < 3; $i++) {
-            $user = new User();
-            $user->name = $faker->firstName() . " " . $faker->lastName;
-            $user->email = strtolower(join("", explode(" ", $user->name))) . "@gmail.com";
-            $user->password = Hash::make("123");
-            $user->membership = "non-active";
-            $user->poin = 0;
-            $user->role = "customer";
-            $user->save();
+            $u = new User();
+            $u->name = $faker->firstName() . " " . $faker->lastName;
+            $u->email = strtolower(join("", explode(" ", $u->name))) . "@gmail.com";
+            $u->password = Hash::make("123");
+            $u->role = "customer";
+            $u->save();
         }
     }
 }
