@@ -1,4 +1,4 @@
-@extends('layout.sbadmin')
+@extends('base')
 
 @section('content')
 

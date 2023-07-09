@@ -36,10 +36,13 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('checkowner');
+        $this->authorize('checkstaff');
+
         $brand = new Brand();
         $brand->name = $request->get('name');
         $brand->save();
-        
+
     }
 
     /**
