@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             TypeSeeder::class,
             MemberSeeder::class,
-            UserSeeder::class,
+            PenggunaSeeder::class,
             ProductSeeder::class,
             TransactionSeeder::class
         ]);

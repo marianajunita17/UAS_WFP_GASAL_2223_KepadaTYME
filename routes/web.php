@@ -24,11 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 Route::post('/product-page/addcart/{product}', [ProductController::class, "addcart"]);
-
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [UserController::class, "cart"]);
     Route::post("/checkout", [TransactionController::class, "checkout"]);

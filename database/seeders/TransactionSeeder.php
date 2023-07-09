@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pengguna;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\User;
@@ -18,7 +19,7 @@ class TransactionSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        $users = User::where("role", "customer")->get();
+        $users = Pengguna::where("role", "customer")->get();
         $products = Product::get();
         for ($i=0; $i < 20; $i++) {
             $t = new Transaction();

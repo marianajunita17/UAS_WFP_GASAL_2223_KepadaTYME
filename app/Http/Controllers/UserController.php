@@ -16,36 +16,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $this->authorize("checkcustomer");
-        $cart = session("cart");
-        return view("public.cart", compact("cart"));
-    }
-
-    function checkout(){
-        $this->authorize("checkcustomer");
-        if(session("cart")){
-            $t = new Transaction();
-            $t->customer_id = Auth::user()->id;
-            $t->transaction_date = Carbon::now()->toDateTimeString();
-            $t->total = 0;
-            $t->save();
-            foreach(session('cart') as $key => $value){
-                $subtotal = $value["quantity"] * $value["price"];
-                $t->products()->attach($key, [
-                    "quantity" => $value["quantity"],
-                    "subtotal" => $subtotal
-                ]);
-                $t->total += $subtotal;
-            }
-            $t->save();
-            session()->forget("cart");
-            return redirect("/product-list");
-        } else{
-            return redirect("/product-list");
-        }
-    }
+    
 
     /**
      * Show the form for creating a new resource.

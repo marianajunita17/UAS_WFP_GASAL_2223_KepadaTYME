@@ -19,7 +19,7 @@ class CreatePenggunasTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('member_id');
+            $table->unsignedBigInteger('member_id')->nullable();
             $table->foreign('member_id')->references('id')->on('members');
             $table->enum('role', ['customer', 'owner', 'staff']);
             $table->rememberToken();
