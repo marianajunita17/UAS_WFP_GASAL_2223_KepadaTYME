@@ -19,7 +19,7 @@ class TransactionSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        $users = Pengguna::where("role", "customer")->get();
+        $users = User::where("role", "customer")->get();
         $products = Product::get();
         for ($i=0; $i < 20; $i++) {
             $t = new Transaction();

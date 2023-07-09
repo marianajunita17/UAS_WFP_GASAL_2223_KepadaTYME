@@ -20,4 +20,8 @@ class Product extends Model
     function transactions(){
         return $this->belongsToMany(Transaction::class)->withPivot(["quantity", "subtotal"]);
     }
+
+    function categories(){
+        return $this->belongsToMany(Category::class);
+    }
 }

@@ -11,6 +11,7 @@
                         <th>Price</th>
                         <th>Type</th>
                         <th>Brand</th>
+                        <th>Category</th>
                         <th>Image</th>
                         <th>Aksi</th>
                     </tr>
@@ -21,6 +22,7 @@
                             <td>{{ $p->price }}</td>
                             <td>{{ $p->type->name }}</td>
                             <td>{{ $p->brand->name }}</td>
+                            <td>{{ $p->categories }}</td>
                             <td><img src="{{ $p->photourl }}" alt="image"></td>
                             <td><button class="btn btn-primary buy-btn" data-id="{{ $p->id }}">Buy Now</button>
                             </td>

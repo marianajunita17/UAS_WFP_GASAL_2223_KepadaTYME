@@ -1,56 +1,56 @@
-@extends('base')
+@extends('layout.app')
 @section('content')
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
+    <div class="container-fluid">
+        <ol class="breadcrumb mt-4">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Category</li>
+        </ol>
+
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalCreate" onclick="">
+            Add category
+        </button><br><br>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $i = 1; ?>
+                @foreach ($categories as $c)
+                    <tr>
+                        <td>{{ $i }}</td>
+                        <td>{{ $d->name }}</td>
+                        <td class="d-flex justify-content-center">
+                            <button onclick="{{ route('categories.edit', $d->id) }}"
+                                class="btn btn-warning">Edit</button>&nbsp&nbsp
+                            @can('checkowner')
+                                <form method="post" action="{{ route('category.destroy', $d->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-lg"
+                                        onclick="if(!confirm('Are you sure you want to delete this category?')){return false;}">Delete</button>
+                                </form>
+                            @endcan
+                        </td>
+                        <td>
+                            @can('checkowner')
+                                <a href="{{ route('categories.show', $c->id) }}">Detail</a>
+                            @endcan
+                        </td>
+                    </tr>
+                    <?php $i++; ?>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-@endif
-
-<div class="container-fluid">
-    <ol class="breadcrumb mt-4">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">Category</li>
-    </ol>
-
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalCreate" onclick="">
-        Add category
-    </button><br><br>
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="table-layout: fixed;">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $i=1; ?>
-            @foreach ($categories as $c)
-            <tr>
-                <td>{{$i}}</td>
-                <td>{{$d->name}}</td>
-                <td class="d-flex justify-content-center">
-                    <button onclick="{{route('categories.edit', $d->id)}}" class="btn btn-warning" >Edit</button>&nbsp&nbsp
-                    @can('checkowner')
-                    <form method="post" action="{{route('category.destroy', $d->id)}}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-lg"
-                            onclick="if(!confirm('Are you sure you want to delete this category?')){return false;}">Delete</button>
-                    </form>
-                    @endcan
-                </td>
-                <td>
-                    @can("checkowner")
-                    <a href="{{route("categories.show", $c->id)}}">Detail</a>
-                    @endcan
-                </td>
-            </tr>
-            <?php $i++; ?>
-            @endforeach
-        </tbody>
-    </table>
-</div>
 @endsection
 
 {{-- @section('modal')
@@ -118,7 +118,7 @@
             type: 'POST',
             url: 'formEditCategory',
             data: {
-                '_token': '<?php echo csrf_token() ?>',
+                '_token': '<?php echo csrf_token(); ?>',
                 'categoryId': categoryId,
             },
             success: function (data) {

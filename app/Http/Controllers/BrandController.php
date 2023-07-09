@@ -14,8 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brand = Brand::all();
-        return view('brand.index', compact('brand'));
+        $brands = Brand::get();
+        return view('brand.index', compact('brands'));
     }
 
     /**
@@ -97,6 +97,6 @@ class BrandController extends Controller
 
         $brand->delete();
             return redirect()->route('brand.index')->with('status', 'Data brand succesfully deleted');
-        
+
     }
 }

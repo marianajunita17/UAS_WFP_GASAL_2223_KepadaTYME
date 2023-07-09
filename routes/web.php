@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -26,7 +27,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/product-page/addcart/{product}', [ProductController::class, "addcart"]);
 Route::middleware(['auth'])->group(function () {
+    Route::get('/base', function (){});
     Route::get('/cart', [UserController::class, "cart"]);
     Route::post("/checkout", [TransactionController::class, "checkout"]);
+    Route::get("/product-page", [ProductController::class, "index"]);
+    Route::get("/staff/brand", [BrandController::class, "index"]);
 });
-Route::get("/product-page", [ProductController::class, "index"]);
+
