@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name', 255);
             $table->double('price', 12, 2);
+            $table->string('dimensi', 255);
             $table->unsignedBigInteger("type_id");
             $table->foreign("type_id")->references("id")->on("types");
             $table->unsignedBigInteger("brand_id");

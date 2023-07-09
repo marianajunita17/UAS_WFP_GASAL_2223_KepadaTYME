@@ -16,7 +16,7 @@ class BrandSeeder extends Seeder
     public function run()
     {
         DB::table('brands')->insert([
-            'name' => 'Channel',
+            'name' => 'Chanel',
             'logourl'=>'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/chanel-logo-design-template-6f6e604425c5632a1c2497553f5216fa_screen.jpg?ts=1651808341'
         ]);
 

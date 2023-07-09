@@ -27,5 +27,9 @@ class TypeSeeder extends Seeder
         DB::table('types')->insert([
             'name' => 'Skin Care'
         ]);
+
+        DB::table('types')->insert([
+            'name' => 'Aksesoris'
+        ]);
     }
 }

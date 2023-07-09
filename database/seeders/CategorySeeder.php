@@ -53,6 +53,18 @@ class CategorySeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
+            'name' => 'Bag'
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Wallet'
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Hat'
+        ]);
+
+        DB::table('categories')->insert([
             'name' => 'Serum'
         ]);
 
