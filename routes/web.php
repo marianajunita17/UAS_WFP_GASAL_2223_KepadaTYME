@@ -29,3 +29,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [UserController::class, "cart"]);
     Route::post("/checkout", [TransactionController::class, "checkout"]);
 });
+Route::get("/product-page", [ProductController::class, "index"]);

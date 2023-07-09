@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,6 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::get();
+        // dd($products);
         return view("product.product-list", compact("products"));
     }
 

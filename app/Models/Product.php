@@ -9,12 +9,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    function brands(){
-        return $this->belongsTo(Brand::class);
+    function type(){
+        return $this->belongsTo(Type::class);
     }
 
-    function types(){
-        return $this->belongsTo(Type::class);
+    function brand(){
+        return $this->belongsTo(Brand::class);
     }
 
     function transactions(){
