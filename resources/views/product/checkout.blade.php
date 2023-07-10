@@ -35,10 +35,24 @@
                                 <td>{{ $subtotal }}</td>
                             </tr>
                         @endforeach
+                        @php
+                            $poin_didapat = ceil($total/100000);
+                            $ppn = $total * 0.11;
+                        @endphp
+                        <tr>
+                            <td colspan="3"></td>
+                            <td>Poin didapat:</td>
+                            <td>{{ $poin_didapat }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td>PPN:</td>
+                            <td>{{ $ppn }}</td>
+                        </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td>TOTAL:</td>
-                            <td>{{ $total }}</td>
+                            <td>{{ $total-$ppn }}</td>
                         </tr>
                     @endif
                 </table>

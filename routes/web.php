@@ -29,11 +29,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/product-page/addcart/{product}', [ProductController::class, "addcart"]);
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [UserController::class, "cart"]);
-    Route::post("/checkout", [UserController::class, "checkout"]);
+    Route::post("/checkout", [UserController::class, "checkout"])->name('product.checkout');
     Route::post("/point", [MemberController::class], 'usepoint')->name('usepoint');
     Route::get("/product-page", [ProductController::class, "index"]);
     Route::get("/transaction", [TransactionController::class, "index"]);
     Route::get("/transaction/detail/{transactionid}", [TransactionController::class, "detail"])->name('public.detailtransaction');
     Route::get("/staff/brand", [BrandController::class, "index"]);
+    Route::get('/owner/member', [UserController::class, "displayMember"]);
 });
 

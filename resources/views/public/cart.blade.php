@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form action="{{ url('/checkout') }}" method="post">
+            <form action="{{ Route('product.checkout') }}" method="post">
                 @csrf
                 <input type="submit" name="" id="" value="Checkout" class="btn btn-success">
             </form>
@@ -35,11 +35,6 @@
                                 <td>{{ $subtotal }}</td>
                             </tr>
                         @endforeach
-                        <tr>
-                            <td colspan="3"></td>
-                            <td>TOTAL:</td>
-                            <td>{{ $total }}</td>
-                        </tr>
                     @endif
                 </table>
             </div>

@@ -16,9 +16,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::user()->id;
-        $member = DB::table('members');
-        return view('public.member', compact("member"));
+        // $user_id = Auth::user()->id;
+        // $member = DB::table('members')->join('users', 'members');
+        // return view('public.member', compact("member"));
     }
 
     // public function usepoint(Request $request){

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -21,26 +22,38 @@ class UserController extends Controller
     function checkout()
     {
         $this->authorize('customer-check');
-        if (session("cart")) {
-            $t = new Transaction();
-            $t->customer_id = Auth::user()->id;
-            $t->transaction_date = Carbon::now()->toDateTimeString();
-            $t->total = 0;
-            $t->save();
-            foreach (session("cart") as $key => $value) {
-                $subtotal = $value["quantity"] * $value["price"];
-                $t->products()->attach($key, [
-                    "quantity" => $value["quantity"],
-                    "subtotal" => $subtotal
-                ]);
-                $t->total += $subtotal;
-            }
-            $t->save();
-            session()->forget("cart");
-            return redirect("/product-page");
-        } else {
-            return redirect("/product-page");
-        }
+        $cart = session()->get('cart');
+        return view('product.checkout', compact('cart'));
+        // if (session("cart")) {
+        //     $t = new Transaction();
+        //     $t->customer_id = Auth::user()->id;
+        //     $t->transaction_date = Carbon::now()->toDateTimeString();
+        //     $t->total = 0;
+        //     $t->save();
+        //     foreach (session("cart") as $key => $value) {
+        //         $subtotal = $value["quantity"] * $value["price"];
+        //         $t->products()->attach($key, [
+        //             "quantity" => $value["quantity"],
+        //             "subtotal" => $subtotal
+        //         ]);
+        //         $t->total += $subtotal;
+        //     }
+        //     $t->save();
+        //     session()->forget("cart");
+        //     return redirect("/product-page");
+        // } else {
+        //     return redirect("/product-page");
+        // }
+    }
+
+    function displayMember(){
+        // $this->authorize('owner-check');
+        $members = DB::table("users")
+                ->where('role', '=', 'customer')
+                ->where('member_id','!=', 'null')
+                ->get();
+        // dd($member);
+        return view('member.index', compact('members'));
     }
 
     /**

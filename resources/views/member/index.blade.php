@@ -6,19 +6,17 @@
             <div class="col-md-10">
                 <table class="table table-bordered">
                     <tr>
-                        <th>Nama Produk</th>
-                        <th>Gambar</th>
-                        <th>harga</th>
-                        <th>Qty</th>
-                        <th>Subtotal</th>
+                        <th>Nama Customer</th>
+                        <th>Email Customer</th>
+                        <th>Poin</th>
+                        <th>Aksi</th>
                     </tr>
-                    @foreach ($transactions as $t)
+                    @foreach ($members as $m)
                         <tr>
-                            <td>{{ $t->name }}</td>
-                            <td><img src="{{ $t->photourl }}" alt="gambar" width="200", height="200"></td>
-                            <td>{{ $t->price }}</td>
-                            <td>{{ $t->quantity }}</td>
-                            <td>{{ $t->subtotal }}</td>
+                            <td>{{ $m->name }}</td>
+                            <td>{{ $m->email }}</td>
+                            <td>{{ $m->members->poin }}</td>
+                            <td><button class="btn btn-primary buy-btn" data-id="{{ $m->id }}">Edit</button></td>
                         </tr>
                     @endforeach
                 </table>

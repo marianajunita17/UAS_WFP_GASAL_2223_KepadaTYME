@@ -6,8 +6,8 @@
             <div class="col-md-10">
                 <table class="table table-bordered">
                     <tr>
-                        <th>Nama Produk</th>
-                        <th>Gambar</th>
+                        <th>Nama</th>
+                        <th>Email</th>
                         <th>harga</th>
                         <th>Qty</th>
                         <th>Subtotal</th>
