@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
@@ -14,7 +16,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('public.member');
+        $user_id = Auth::user()->id;
+        $member = DB::table('members');
+        return view('public.member', compact("member"));
     }
 
     // public function usepoint(Request $request){
