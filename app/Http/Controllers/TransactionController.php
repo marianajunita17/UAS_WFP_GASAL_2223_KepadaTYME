@@ -35,6 +35,34 @@ class TransactionController extends Controller
         return view('public.detailtransaction', compact('transactions'));
     }
 
+
+    /**
+     * Summary of laporan
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function laporan(){
+        // $laporan = DB::table('product_transaction')
+        //         ->select('products.name', 'products.price', DB::raw('sum(product_transaction.quantity)'),'transactions.transaction_date'])
+        //         ->join('products', 'product_transaction.product_id', '=', 'products.id')
+        //         ->join('transactions', 'product_transaction.transaction_id', '=', 'transactions.id')
+        //         ->where('transactions.transaction_date', 'LIKE', '%08%')
+        //         ->groupBy('product_transaction.product_id')
+        //         ->orderBy('product_transaction.quantity', 'DESC')
+        //         ->get();
+
+
+        $laporan = DB::select('SELECT products.name, products.price, SUM(product_transaction.quantity) as qty, transactions.transaction_date
+        FROM `product_transaction`
+        inner join products on product_transaction.product_id = products.id
+        inner join transactions on product_transaction.transaction_id = transactions.id
+        WHERE Month(transactions.transaction_date)=8
+        GROUP by products.id, products.name, product_transaction.product_id, products.price, transactions.transaction_date
+        ORDER BY qty DESC');
+        // dd($laporan);
+        return view('public.laporan', compact('laporan'));
+    }
+
     public function formSubmit()
     {
         $this->authorize('customer-check');

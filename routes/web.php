@@ -36,5 +36,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/transaction/detail/{transactionid}", [TransactionController::class, "detail"])->name('public.detailtransaction');
     Route::get("/staff/brand", [BrandController::class, "index"]);
     Route::get('/owner/member', [UserController::class, "displayMember"]);
+    Route::get("/laporan", [TransactionController::class, "laporan"]);
 });
 
