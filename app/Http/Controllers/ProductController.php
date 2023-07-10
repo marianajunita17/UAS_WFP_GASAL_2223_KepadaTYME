@@ -17,7 +17,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::get();
-        // dd($products);
         return view("product.product-list", compact("products"));
     }
 
@@ -32,8 +31,7 @@ class ProductController extends Controller
     }
 
     function addcart(Product $product) {
-        $cart = session("cart"); //-> bisa gini
-        // $cart = session()->get("cart"); // bisa gni juga ambil session
+        $cart = session("cart");
         if(!$cart){
             $cart = array();
         }
@@ -41,8 +39,9 @@ class ProductController extends Controller
             $cart[$product->id] = [
                 "name" => $product->name,
                 "quantity" => 1,
+                "ukuran" => $product->dimensi,
                 "price" => $product->price,
-                "filename" => $product->filename
+                "photourl" => $product->photourl
             ];
         } else{
             $cart[$product->id]

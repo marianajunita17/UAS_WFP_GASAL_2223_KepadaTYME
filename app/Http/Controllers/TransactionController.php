@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,38 +19,26 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $userid = Auth::user()->id;
+        $transaction = DB::table('transactions')->where('user_id', '=', $userid)->get();
+        // dd($transaction);
+        return view('public.transaction', compact('transaction'));
+    }
+
+    public function detail(Request $request){
+        $id = $request['transactionid'];
+        $transactions = DB::table('product_transaction')
+                    ->select(['products.name', 'products.price', 'products.photourl', 'product_transaction.quantity', 'product_transaction.subtotal'])
+                    ->join('products', 'product_transaction.product_id', '=', 'products.id')
+                    ->where('product_transaction.transaction_id', '=', $id)
+                    ->get();
+        return view('public.detailtransaction', compact('transactions'));
     }
 
     public function formSubmit()
     {
-        $this->authorize('checkcustomer');
+        $this->authorize('customer-check');
         return view('public.checkout');
-    }
-
-    public function checkout()
-    {
-        $this->authorize('checkcustomer');
-
-        $cart = session()->get('cart');
-        $user = Auth::user();
-        $t = new Transaction;
-        $t->user_id = $user->id;
-        $t->created_at = Carbon::now()->toDateTimeString();
-        $t->save();
-
-        $totalHarga = $t->insertProduct($cart, $user);
-        $t->total = $totalHarga;
-        $t->save();
-
-        foreach ($cart as $id => $detail) {
-            $p = Product::find($detail['product_id']);
-            $p->stock = $p->stock - $detail['quantity'];
-            $p->save();
-        }
-
-        session()->forget('cart');
-        return redirect('home');
     }
 
     /**

@@ -9,6 +9,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Price</th>
+                        <th>Ukuran</th>
                         <th>Type</th>
                         <th>Brand</th>
                         <th>Category</th>
@@ -20,10 +21,15 @@
                             <td>{{ $p->id }}</td>
                             <td>{{ $p->name }}</td>
                             <td>{{ $p->price }}</td>
+                            <td>{{ $p->dimensi }}</td>
                             <td>{{ $p->type->name }}</td>
                             <td>{{ $p->brand->name }}</td>
-                            <td>{{ $p->categories }}</td>
-                            <td><img src="{{ $p->photourl }}" alt="image"></td>
+                            <td>
+                                @foreach ($p->categories()->get() as $cat)
+                                    <li>{{ $cat->name }}</li>
+                                @endforeach
+                            </td>
+                            <td><img src="{{ $p->photourl }}" alt="image" width="200" height="200"></td>
                             <td><button class="btn btn-primary buy-btn" data-id="{{ $p->id }}">Buy Now</button>
                             </td>
                         </tr>

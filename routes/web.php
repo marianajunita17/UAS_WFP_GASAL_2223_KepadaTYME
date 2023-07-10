@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,10 +28,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/product-page/addcart/{product}', [ProductController::class, "addcart"]);
 Route::middleware(['auth'])->group(function () {
-    Route::get('/base', function (){});
     Route::get('/cart', [UserController::class, "cart"]);
-    Route::post("/checkout", [TransactionController::class, "checkout"]);
+    Route::post("/checkout", [UserController::class, "checkout"]);
+    Route::post("/point", [MemberController::class], 'usepoint')->name('usepoint');
     Route::get("/product-page", [ProductController::class, "index"]);
+    Route::get("/transaction", [TransactionController::class, "index"]);
+    Route::get("/transaction/detail/{transactionid}", [TransactionController::class, "detail"])->name('public.detailtransaction');
     Route::get("/staff/brand", [BrandController::class, "index"]);
 });
 

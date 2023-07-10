@@ -13,7 +13,7 @@ class CreateProductCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_category', function (Blueprint $table) {
+        Schema::create('category_product', function (Blueprint $table) {
             $table->unsignedBigInteger("product_id");
             $table->foreign("product_id")->references("id")->on("products");
             $table->unsignedBigInteger("category_id");

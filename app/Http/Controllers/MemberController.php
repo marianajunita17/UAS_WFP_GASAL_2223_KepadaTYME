@@ -17,6 +17,11 @@ class MemberController extends Controller
         return view('public.member');
     }
 
+    // public function usepoint(Request $request){
+    //     $poin =
+
+    // }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -42,6 +42,9 @@
                         </tr>
                     @endif
                 </table>
+                <form action="{{route('usepoint')}}">
+
+                </form>
             </div>
         </div>
     </div>

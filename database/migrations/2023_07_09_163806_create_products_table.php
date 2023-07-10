@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->foreign("type_id")->references("id")->on("types");
             $table->unsignedBigInteger("brand_id");
             $table->foreign("brand_id")->references("id")->on("brands");
-            $table->string("photourl", 255);
+            $table->string("photourl", 300);
             $table->timestamps();
         });
     }
